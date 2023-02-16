@@ -46,9 +46,9 @@ jobs:
         run: make install
       - name: Set static type variable
         env:
-          IF-STATIC: ${{ matrix.build-keys }}
+          STATIC: ${{ matrix.build-keys }}
         run: |
-          if ${IF-STATIC} == "--without-x"; then
+          if ${STATIC} == "--without-x"; then
             echo "disttype=distrib" >> $GITHUB_ENV
             echo "Build shared linked binary"
           else
@@ -61,11 +61,11 @@ jobs:
           name: mc-${{ env.disttype }}
           path: |
             build
-      - name: Archive workflow results
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-workflow-report
-          path: output/test/code-coverage.html
+#      - name: Archive workflow results
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: code-workflow-report
+#          path: output/test/code-coverage.html
 
 
 
