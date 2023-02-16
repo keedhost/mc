@@ -9,7 +9,7 @@ on:
 jobs:
   prepare_build_enviroment:
     runs-on: ubuntu-latest
-    name: Install build dependies
+    name: Install build
     steps:
       - name: Install dependies
         run: |
@@ -28,17 +28,13 @@ jobs:
                             autopoint \
                             pkg-config
     
-  build:
-    runs-on: ubuntu-latest
-    needs: prepare_build_enviroment
-    steps:
-    - uses: actions/checkout@v3
-    - name: Autoconf
-      run: ./autogen.sh
-    - name: configure
-      run: mkdir build && ./configure --prefix=$PWD/build
-    - name: make
-      run: make
-    - name: make install
-      run: make install
+      - uses: actions/checkout@v3
+      - name: autogen
+        run: ./autogen.sh
+      - name: configure
+        run: mkdir build && ./configure --prefix=$PWD/build
+      - name: make
+        run: make
+      - name: make install
+        run: make install
 
