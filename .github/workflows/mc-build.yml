@@ -44,10 +44,21 @@ jobs:
         run: make
       - name: make install
         run: make install
+      - name: Set static type variable
+        env:
+          IF-STATIC: ${{ matrix.build-keys }}
+        run: |
+          if ${IF-STATIC} == "--without-x"; then
+            echo "disttype=distrib" >> $GITHUB_ENV
+            echo "Build shared linked binary"
+          else
+            echo "disttype=static" >> $GITHUB_ENV
+            echo "Build static linked binary"
+          fi
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: mc
+          name: mc-${{ env.disttype }}
           path: |
             build
       - name: Archive workflow results
