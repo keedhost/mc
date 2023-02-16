@@ -38,4 +38,11 @@ jobs:
         run: make
       - name: make install
         run: make install
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: mc
+          path: |
+            build
+
 
