@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: sysinfo
+      run: pwd && ls -lah
     - name: configure
       run: ./configure
     - name: make
