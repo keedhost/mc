@@ -10,10 +10,11 @@ jobs:
   prepare_build_enviroment:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         build-keys:
           - "--without-x"
-          - "--with-glib-static --without-x --disable-shared --enable-static CC='gcc -static -static-libgcc -fno-exceptions' CXX='g++ -static -static-libgcc -fno-exceptions' LDFLAGS='-Wl,-static -static -lc' LIBS='-lc'"
+          - "--disable-shared --enable-static"
     name: Build
     steps:
       - name: Install build dependies
