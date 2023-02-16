@@ -1,0 +1,30 @@
+name: Build Midnight Commander
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  prepare_build_enviroment:
+    runs-on: ubuntu-latest
+    name: Install build dependies
+    steps:
+      - name: Install dependies
+        run: |
+          sudo apt update
+          sudo apt install glibc gcc make autoconf automake libtool glib2 ncurses gettext libssh2 libaspell ext2fs
+    
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: ./configure
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name: make distcheck
+      run: make distcheck
