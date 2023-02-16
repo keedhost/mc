@@ -14,7 +14,7 @@ jobs:
       - name: Install dependies
         run: |
           sudo apt update
-          sudo apt install glibc gcc make autoconf automake libtool glib2 ncurses gettext libssh2 libaspell ext2fs
+          sudo apt install glibc-source gcc make autoconf automake libtool ncurses-base ncurses-bin gettext libssh2-1-dev libaspell-dev
     
   build:
     runs-on: ubuntu-latest
